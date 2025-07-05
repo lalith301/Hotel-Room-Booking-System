@@ -4,11 +4,11 @@ import {
 } from 'antd';
 import Link from 'next/link';
 import React, { useState } from 'react';
-import MainLayout from '../../components/layout';
-import PublicRoute from '../../components/routes/PublicRoute';
-import ApiService from '../../utils/apiService';
-import { setSessionUserAndToken } from '../../utils/authentication';
-import notificationWithIcon from '../../utils/notification';
+import MainLayout from '../../components/layout/index.jsx';  // ✅ Fixed for JSX
+import PublicRoute from '../../components/routes/PublicRoute.jsx';  // ✅ Fixed for JSX
+import ApiService from '../../utils/apiService.js';  // ✅ Fixed for JS utility
+import { setSessionUserAndToken } from '../../utils/authentication.js';  // ✅ Fixed for JS utility
+import notificationWithIcon from '../../utils/notification.js';  // ✅ Fixed for JS utility
 
 function Login() {
   const [loading, setLoading] = useState(false);

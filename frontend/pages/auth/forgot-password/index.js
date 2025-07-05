@@ -3,10 +3,10 @@ import { Button, Form, Input } from 'antd';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
-import MainLayout from '../../../components/layout';
-import PublicRoute from '../../../components/routes/PublicRoute';
-import ApiService from '../../../utils/apiService';
-import notificationWithIcon from '../../../utils/notification';
+import MainLayout from '../../../components/layout/index.jsx';  // ✅ Changed to .jsx
+import PublicRoute from '../../../components/routes/PublicRoute.jsx';  // ✅ Check if this is also JSX
+import ApiService from '../../../utils/apiService.js';  // ✅ Keep .js for utility files
+import notificationWithIcon from '../../../utils/notification.js';  // ✅ Keep .js for utility files
 
 function ForgotPassword() {
   const [loading, setLoading] = useState(false);

@@ -2,10 +2,10 @@ import { HistoryOutlined, UserOutlined } from '@ant-design/icons';
 import { Tabs } from 'antd';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import MainLayout from '../../components/layout';
-import BookingHistory from '../../components/profile/BookingHistory';
-import MyProfile from '../../components/profile/MyProfile';
-import PrivateRoute from '../../components/routes/PrivateRoute';
+import MainLayout from '../../components/layout/index.jsx';  // ✅ Fixed for JSX
+import BookingHistory from '../../components/profile/BookingHistory.jsx';  // ✅ Fixed for JSX
+import MyProfile from '../../components/profile/MyProfile.jsx';  // ✅ Fixed for JSX
+import PrivateRoute from '../../components/routes/PrivateRoute.jsx'; 
 
 function Profile() {
   const [activeTab, setActiveTab] = useState(1);

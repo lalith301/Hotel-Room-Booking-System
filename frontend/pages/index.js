@@ -3,11 +3,11 @@ import axios from 'axios';
 import getConfig from 'next/config';
 import Link from 'next/link';
 import React from 'react';
-import Banner from '../components/home/Banner';
-import FeaturedRooms from '../components/home/FeaturedRooms';
-import Hero from '../components/home/Hero';
-import Services from '../components/home/Services';
-import MainLayout from '../components/layout';
+import Banner from '../components/home/Banner.jsx';  // ✅ Fixed for JSX
+import FeaturedRooms from '../components/home/FeaturedRooms.jsx';  // ✅ Fixed for JSX
+import Hero from '../components/home/Hero.jsx';  // ✅ Fixed for JSX
+import Services from '../components/home/Services.jsx';  // ✅ Fixed for JSX
+import MainLayout from '../components/layout/index.jsx';  // ✅ Fixed for JSX
 
 const { publicRuntimeConfig } = getConfig();
 

@@ -1,64 +1,41 @@
 import axios from 'axios';
-import getConfig from 'next/config';
-import { getSessionToken, removeSessionAndLogoutUser } from './authentication';
+import { getSessionToken, removeSessionAndLogoutUser } from './authentication.js';
 
-const { publicRuntimeConfig } = getConfig();
+// ✅ Use environment variable instead of getConfig
+const API_BASE_URL = process.env.API_BASE_URL || 'https://hotel-room-booking-system-j0rb.onrender.com';
 
 const ApiService = axios.create({
-  baseURL: publicRuntimeConfig.API_BASE_URL
+  baseURL: API_BASE_URL,  // ✅ Fixed: Use the environment variable
+  timeout: 60000,
+  headers: {
+    'Content-Type': 'application/json',
+  },
 });
 
-/**
- * Interceptor for all requests
- */
+// Request interceptor to add auth token
 ApiService.interceptors.request.use(
   (config) => {
-    /**
-     * Add your request interceptor logic here: setting headers, authorization etc.
-     */
-    config.headers['Content-Type'] = 'application/json';
-
-    if (!config?.noAuth) {
-      const token = getSessionToken();
-      if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
-      }
+    const token = getSessionToken();
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
     }
-
     return config;
   },
-  (error) => Promise.reject(error)
-);
-
-/**
- * Interceptor for all responses
- */
-ApiService.interceptors.response.use(
-  /**
-  * Add logic for successful response
-  */
-  (response) => response?.data || {},
-
-  /**
-  * Add logic for any error from backend
-  */
-  async (error) => {
-    const originalRequest = error.config;
-
-    if (error?.response?.data?.result_code === 11) {
-      // if authorized to logout user and redirect login page
-      removeSessionAndLogoutUser();
-    }
-
-    // eslint-disable-next-line no-underscore-dangle
-    if (error.response.status === 401 && !originalRequest._retry) {
-      // if authorized to logout user and redirect login page
-      removeSessionAndLogoutUser();
-    }
-
-    // Handle other error cases
+  (error) => {
     return Promise.reject(error);
   }
 );
 
-export default ApiService;
+// Response interceptor to handle auth errors
+ApiService.interceptors.response.use(
+  (response) => {
+    return response.data;
+  },
+  (error) => {
+    if (error.response?.status === 401) {
+      removeSessionAndLogoutUser();
+      window.location.href = '/auth/login';
+    }
+    return Promise.reject(error);
+  }
+);

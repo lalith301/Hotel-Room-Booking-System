@@ -3,11 +3,11 @@ import axios from 'axios';
 import getConfig from 'next/config';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
-import Banner from '../../components/home/Banner';
-import Hero from '../../components/home/Hero';
-import MainLayout from '../../components/layout';
-import RoomFilter from '../../components/rooms/RoomsFilter';
-import RoomList from '../../components/rooms/RoomsList';
+import Banner from '../../components/home/Banner.jsx';  // ✅ Fixed for JSX
+import Hero from '../../components/home/Hero.jsx';  // ✅ Fixed for JSX
+import MainLayout from '../../components/layout/index.jsx';  // ✅ Fixed for JSX
+import RoomFilter from '../../components/rooms/RoomsFilter.jsx';  // ✅ Fixed for JSX
+import RoomList from '../../components/rooms/RoomsList.jsx'; 
 
 const { publicRuntimeConfig } = getConfig();
 
