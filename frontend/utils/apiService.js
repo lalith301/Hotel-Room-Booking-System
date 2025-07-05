@@ -1,18 +1,14 @@
 import axios from 'axios';
 import { getSessionToken, removeSessionAndLogoutUser } from './authentication.js';
 
-// ✅ Use environment variable instead of getConfig
+// Use environment variable directly
 const API_BASE_URL = process.env.API_BASE_URL || 'https://hotel-room-booking-system-j0rb.onrender.com';
 
 const ApiService = axios.create({
-  baseURL: API_BASE_URL,  // ✅ Fixed: Use the environment variable
-  timeout: 60000,
-  headers: {
-    'Content-Type': 'application/json',
-  },
+  baseURL: API_BASE_URL
 });
 
-// Request interceptor to add auth token
+// Add request interceptor for authentication
 ApiService.interceptors.request.use(
   (config) => {
     const token = getSessionToken();
@@ -26,16 +22,18 @@ ApiService.interceptors.request.use(
   }
 );
 
-// Response interceptor to handle auth errors
+// Add response interceptor for handling auth errors
 ApiService.interceptors.response.use(
-  (response) => {
-    return response.data;
-  },
+  (response) => response,
   (error) => {
     if (error.response?.status === 401) {
       removeSessionAndLogoutUser();
-      window.location.href = '/auth/login';
+      if (typeof window !== 'undefined') {
+        window.location.href = '/auth/login';
+      }
     }
     return Promise.reject(error);
   }
 );
+
+export default ApiService;  
