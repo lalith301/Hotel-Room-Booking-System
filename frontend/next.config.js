@@ -14,7 +14,35 @@ const nextConfig = {
   },
   env: {
     API_BASE_URL: process.env.API_BASE_URL,
+  },
+  transpilePackages: [
+    'rc-util',
+    'rc-tree',
+    'rc-table',
+    'rc-pagination',
+    'rc-picker',
+    'rc-notification',
+    'rc-tooltip',
+    'antd'
+  ],
+
+  webpack: (config, { isServer }) => {
+    // Fix module resolution for rc-* packages
+    config.resolve.extensionAlias = {
+      '.js': ['.ts', '.tsx', '.js', '.jsx'],
+    };
+
+    config.module.rules.push({
+      test: /\.m?js$/,
+      resolve: {
+        fullySpecified: false,
+      },
+    });
+
+    return config;
   }
 }
 
 module.exports = nextConfig;
+
+
