@@ -4,7 +4,7 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   env: {
-    API_BASE_URL: process.env.API_BASE_URL,
+    API_BASE_URL: process.env.NEXT_PUBLIC_API_BASE_URL,  // ✅ Match your .env file
   },
   transpilePackages: [
     'antd',
@@ -21,18 +21,14 @@ const nextConfig = {
   experimental: {
     esmExternals: false,
   },
-  publicRuntimeConfig: {
-    API_BASE_URL: 'https://hotel-room-booking-system-j0rb.onrender.com', // ✅ Fixed: Removed /api
-  },
+  // Remove publicRuntimeConfig to avoid conflicts
   webpack: (config, { isServer }) => {
-    // More comprehensive alias mapping for rc-util
     config.resolve.alias = {
       ...config.resolve.alias,
       'rc-util/es': 'rc-util/lib',
       'rc-util/es/warning': 'rc-util/lib/warning',
       'rc-util/es/warning.js': 'rc-util/lib/warning.js',
     };
-    
     if (!isServer) {
       config.resolve.fallback = {
         ...config.resolve.fallback,
