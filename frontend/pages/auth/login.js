@@ -28,7 +28,6 @@ function Login() {
       })
       .catch((err) => {
         setLoading(false);
-
         const rawError = err?.response?.data?.result?.error;
         const errorMessage = typeof rawError === 'string'
           ? rawError
