@@ -21,13 +21,18 @@ const nextConfig = {
   experimental: {
     esmExternals: false,
   },
+  publicRuntimeConfig: {
+    API_BASE_URL: 'https://hotel-room-booking-system-j0rb.onrender.com', 
+  },
   webpack: (config, { isServer }) => {
+    // More comprehensive alias mapping for rc-util
     config.resolve.alias = {
       ...config.resolve.alias,
       'rc-util/es': 'rc-util/lib',
       'rc-util/es/warning': 'rc-util/lib/warning',
       'rc-util/es/warning.js': 'rc-util/lib/warning.js',
     };
+    
     if (!isServer) {
       config.resolve.fallback = {
         ...config.resolve.fallback,
@@ -40,4 +45,4 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;  // ✅ ES6 export (not module.exports)
+module.exports = nextConfig;

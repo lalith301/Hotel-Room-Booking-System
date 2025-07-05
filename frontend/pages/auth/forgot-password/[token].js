@@ -3,20 +3,17 @@ import { Button, Form, Input } from 'antd';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
-import MainLayout from '../../../components/layout/index.jsx';  // ✅ Changed to .jsx
-import PublicRoute from '../../../components/routes/PublicRoute.jsx';  // ✅ Check if this is also JSX
-import ApiService from '../../../utils/apiService.js';  // ✅ Keep .js for utility files
-import notificationWithIcon from '../../../utils/notification.js';  // ✅ Keep .js for utility files
-
+import MainLayout from '../../../components/layout';
+import PublicRoute from '../../../components/routes/PublicRoute';
+import ApiService from '../../../utils/apiService';
+import notificationWithIcon from '../../../utils/notification';
 
 function ResetPassword() {
   const [loading, setLoading] = useState(false);
   const [form] = Form.useForm();
   const router = useRouter();
-  
+
   const onFinish = (values) => {
-    setLoading(true);  // Add this missing line
-    
     ApiService.post(`/api/v1/auth/reset-password/${router.query.token}`, values)
       .then((response) => {
         setLoading(false);
@@ -60,7 +57,7 @@ function ResetPassword() {
                 size='large'
               />
             </Form.Item>
-            
+
             <Form.Item
               name='confirmPassword'
               rules={[{
@@ -75,7 +72,7 @@ function ResetPassword() {
                 size='large'
               />
             </Form.Item>
-            
+
             <Form.Item>
               <Button
                 className='login-form-button'
@@ -89,7 +86,7 @@ function ResetPassword() {
                 Reset Password
               </Button>
             </Form.Item>
-            
+
             <Link
               className='btn-login-registration'
               href='/auth/login'

@@ -5,15 +5,14 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { v4 as uniqueId } from 'uuid';
-import Banner from '../../components/home/Banner.jsx';  // ✅ Fixed for JSX
-import MainLayout from '../../components/layout/index.jsx';  // ✅ Fixed for JSX
-import StyledHero from '../../components/rooms/StyledHero.jsx';  // ✅ Fixed for JSX
-import Loading from '../../components/shared/Loading.jsx';  // ✅ Fixed for JSX
-import OrderPlaceModal from '../../components/utilities/OrderPlaceModal.jsx';  // ✅ Fixed for JSX
-import RoomReviewList from '../../components/utilities/RoomReviewList.jsx';  // ✅ Fixed for JSX
-import { getSessionToken, getSessionUser } from '../../utils/authentication.js';  // ✅ Fixed for JS
-import notificationWithIcon from '../../utils/notification.js';  // ✅ Fixed for JS
-
+import Banner from '../../components/home/Banner';
+import MainLayout from '../../components/layout';
+import StyledHero from '../../components/rooms/StyledHero';
+import Loading from '../../components/shared/Loading';
+import OrderPlaceModal from '../../components/utilities/OrderPlaceModal';
+import RoomReviewList from '../../components/utilities/RoomReviewList';
+import { getSessionToken, getSessionUser } from '../../utils/authentication';
+import notificationWithIcon from '../../utils/notification';
 
 const { publicRuntimeConfig } = getConfig();
 

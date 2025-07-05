@@ -2,13 +2,12 @@ import { Result } from 'antd';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import MainLayout from '../../../components/layout/index.jsx';  // ✅ Fixed for JSX
-import PrivateRoute from '../../../components/routes/PrivateRoute.jsx';  // ✅ Fixed for JSX
-import Loading from '../../../components/shared/Loading.jsx';  // ✅ Fixed for JSX
-import ApiService from '../../../utils/apiService.js';  // ✅ Fixed for JS utility
-import { setSessionUserKeyAgainstValue } from '../../../utils/authentication.js';  // ✅ Fixed for JS utility
-import notificationWithIcon from '../../../utils/notification.js';  // ✅ Fixed for JS utility
-
+import MainLayout from '../../../components/layout';
+import PrivateRoute from '../../../components/routes/PrivateRoute';
+import Loading from '../../../components/shared/Loading';
+import ApiService from '../../../utils/apiService';
+import { setSessionUserKeyAgainstValue } from '../../../utils/authentication';
+import notificationWithIcon from '../../../utils/notification';
 
 function VerifyEmail() {
   const [loading, setLoading] = useState(true);
