@@ -66,10 +66,10 @@ export async function getServerSideProps() {
   try {
     // ✅ FIXED: Use the correct endpoint
     const res = await axios.get(`${publicRuntimeConfig.API_BASE_URL}/api/v1/all-rooms-list`);
-    
+
     // ✅ FIXED: Use the correct response structure
     const rooms = res?.data?.result;
-    
+
     return {
       props: {
         rooms,

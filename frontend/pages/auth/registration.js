@@ -47,15 +47,14 @@ function Registration() {
       })
       .catch((err) => {
         setLoading(false);
-      
+
         const rawError = err?.response?.data?.result?.error;
         const errorMessage = typeof rawError === 'string'
           ? rawError
           : rawError?.message || 'Sorry! Something went wrong. App server error';
-      
+
         notificationWithIcon('error', 'ERROR', errorMessage);
       });
-      
   };
 
   return (

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getSessionToken, removeSessionAndLogoutUser } from './authentication.js';
+import { getSessionToken, removeSessionAndLogoutUser } from './authentication';
 
 // Use environment variable directly
 const API_BASE_URL = process.env.API_BASE_URL || 'https://hotel-room-booking-system-j0rb.onrender.com';
@@ -17,9 +17,7 @@ ApiService.interceptors.request.use(
     }
     return config;
   },
-  (error) => {
-    return Promise.reject(error);
-  }
+  (error) => Promise.reject(error)
 );
 
 // Add response interceptor for handling auth errors
@@ -36,4 +34,4 @@ ApiService.interceptors.response.use(
   }
 );
 
-export default ApiService;  
+export default ApiService;
