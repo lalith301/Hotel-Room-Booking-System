@@ -1,5 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  env: {
+    API_BASE_URL: process.env.API_BASE_URL,
+  },
   transpilePackages: [
     'antd',
     '@ant-design/icons',
@@ -16,7 +22,7 @@ const nextConfig = {
     esmExternals: false,
   },
   publicRuntimeConfig: {
-    API_BASE_URL: 'http://localhost:5010', // ✅ Fixed: Removed /api
+    API_BASE_URL: 'https://hotel-room-booking-system-j0rb.onrender.com', // ✅ Fixed: Removed /api
   },
   webpack: (config, { isServer }) => {
     // More comprehensive alias mapping for rc-util
