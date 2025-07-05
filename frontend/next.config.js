@@ -1,7 +1,7 @@
 const nextConfig = {
   reactStrictMode: true,
   eslint: {
-    ignoreDuringBuilds: true,  // Add this line
+    ignoreDuringBuilds: true // Add this line
   },
   publicRuntimeConfig: {
     // Will be available on both server and client
