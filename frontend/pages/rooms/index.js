@@ -1,3 +1,12 @@
+/**
+ * @name Hotel Room Booking System
+ * @author Md. Samiur Rahman (Mukul)
+ * @description Hotel Room Booking and Management System Software ~ Developed By Md. Samiur Rahman (Mukul)
+ * @copyright ©2023 ― Md. Samiur Rahman (Mukul). All rights reserved.
+ * @version v0.0.1
+ *
+ */
+
 import { Empty, Result, Skeleton } from 'antd';
 import axios from 'axios';
 import getConfig from 'next/config';
@@ -64,11 +73,9 @@ function Rooms(props) {
 
 export async function getServerSideProps() {
   try {
-    // ✅ FIXED: Use the correct endpoint
-    const res = await axios.get(`${publicRuntimeConfig.API_BASE_URL}/api/v1/all-rooms-list`);
-
-    // ✅ FIXED: Use the correct response structure
-    const rooms = res?.data?.result;
+    // Fetch data from the server-side API
+    const response = await axios.get(`${publicRuntimeConfig.API_BASE_URL}/api/v1/all-rooms-list`);
+    const rooms = response?.data?.result;
 
     return {
       props: {
@@ -80,7 +87,7 @@ export async function getServerSideProps() {
     return {
       props: {
         rooms: null,
-        error: err?.response?.data || { message: err.message || 'Something went wrong' }
+        error: err?.data
       }
     };
   }

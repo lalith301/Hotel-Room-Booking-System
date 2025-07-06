@@ -1,35 +1,71 @@
+/**
+ * @name Hotel Room Booking System
+ * @author Md. Samiur Rahman (Mukul)
+ * @description Hotel Room Booking and Management System Software ~ Developed By Md. Samiur Rahman (Mukul)
+ * @copyright ©2023 ― Md. Samiur Rahman (Mukul). All rights reserved.
+ * @version v0.0.1
+ *
+ */
+
 import axios from 'axios';
+import getConfig from 'next/config';
 import { getSessionToken, removeSessionAndLogoutUser } from './authentication';
 
-// Use environment variable directly
-const API_BASE_URL = process.env.API_BASE_URL || 'https://hotel-room-booking-system-j0rb.onrender.com';
+const { publicRuntimeConfig } = getConfig();
 
 const ApiService = axios.create({
-  baseURL: API_BASE_URL
+  baseURL: publicRuntimeConfig.API_BASE_URL
 });
 
-// Add request interceptor for authentication
+/**
+ * Interceptor for all requests
+ */
 ApiService.interceptors.request.use(
   (config) => {
-    const token = getSessionToken();
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+    /**
+     * Add your request interceptor logic here: setting headers, authorization etc.
+     */
+    config.headers['Content-Type'] = 'application/json';
+
+    if (!config?.noAuth) {
+      const token = getSessionToken();
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
     }
+
     return config;
   },
   (error) => Promise.reject(error)
 );
 
-// Add response interceptor for handling auth errors
+/**
+ * Interceptor for all responses
+ */
 ApiService.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    if (error.response?.status === 401) {
+  /**
+  * Add logic for successful response
+  */
+  (response) => response?.data || {},
+
+  /**
+  * Add logic for any error from backend
+  */
+  async (error) => {
+    const originalRequest = error.config;
+
+    if (error?.response?.data?.result_code === 11) {
+      // if authorized to logout user and redirect login page
       removeSessionAndLogoutUser();
-      if (typeof window !== 'undefined') {
-        window.location.href = '/auth/login';
-      }
     }
+
+    // eslint-disable-next-line no-underscore-dangle
+    if (error.response.status === 401 && !originalRequest._retry) {
+      // if authorized to logout user and redirect login page
+      removeSessionAndLogoutUser();
+    }
+
+    // Handle other error cases
     return Promise.reject(error);
   }
 );

@@ -1,29 +1,20 @@
+/**
+ * @name Hotel Room Booking System
+ * @author Md. Samiur Rahman (Mukul)
+ * @description Hotel Room Booking and Management System Software ~ Developed By Md. Samiur Rahman (Mukul)
+ * @copyright ©2023 ― Md. Samiur Rahman (Mukul). All rights reserved.
+ * @version v0.0.1
+ *
+ */
+
+import { HistoryOutlined, UserOutlined } from '@ant-design/icons';
+import { Tabs } from 'antd';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import dynamic from 'next/dynamic';
 import MainLayout from '../../components/layout';
+import BookingHistory from '../../components/profile/BookingHistory';
+import MyProfile from '../../components/profile/MyProfile';
 import PrivateRoute from '../../components/routes/PrivateRoute';
-
-// Dynamic imports to avoid build issues
-const Tabs = dynamic(() => import('antd').then(mod => ({ default: mod.Tabs })), {
-  ssr: false
-});
-
-const UserOutlined = dynamic(() => import('@ant-design/icons').then(mod => ({ default: mod.UserOutlined })), {
-  ssr: false
-});
-
-const HistoryOutlined = dynamic(() => import('@ant-design/icons').then(mod => ({ default: mod.HistoryOutlined })), {
-  ssr: false
-});
-
-const BookingHistory = dynamic(() => import('../../components/profile/BookingHistory'), {
-  ssr: false
-});
-
-const MyProfile = dynamic(() => import('../../components/profile/MyProfile'), {
-  ssr: false
-});
 
 function Profile() {
   const [activeTab, setActiveTab] = useState(1);

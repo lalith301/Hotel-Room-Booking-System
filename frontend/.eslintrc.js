@@ -15,11 +15,6 @@ module.exports = {
   },
   plugins: ['react'],
   rules: {
-    "eol-last": "error",
-    "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 0 }],
-    "no-trailing-spaces": "error",
-    "padded-blocks": ["error", "never"],
-    "no-console": "warn",
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
     'jsx-a11y/label-has-associated-control': 'off',
     'import/no-extraneous-dependencies': 'off',

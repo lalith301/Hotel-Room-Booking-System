@@ -1,8 +1,17 @@
+/**
+ * @name Hotel Room Booking System
+ * @author Md. Samiur Rahman (Mukul)
+ * @description Hotel Room Booking and Management System Software ~ Developed By Md. Samiur Rahman (Mukul)
+ * @copyright ©2023 ― Md. Samiur Rahman (Mukul). All rights reserved.
+ * @version v0.0.1
+ *
+ */
+
+import { Empty, Result, Skeleton } from 'antd';
 import axios from 'axios';
 import getConfig from 'next/config';
 import Link from 'next/link';
 import React from 'react';
-import dynamic from 'next/dynamic';
 import Banner from '../components/home/Banner';
 import FeaturedRooms from '../components/home/FeaturedRooms';
 import Hero from '../components/home/Hero';
@@ -10,22 +19,6 @@ import Services from '../components/home/Services';
 import MainLayout from '../components/layout';
 
 const { publicRuntimeConfig } = getConfig();
-
-// Dynamic imports for Ant Design components to avoid SSR issues
-const Empty = dynamic(() => import('antd').then(mod => ({ default: mod.Empty })), {
-  ssr: false,
-  loading: () => <div style={{ padding: '20px', textAlign: 'center' }}>Loading...</div>
-});
-
-const Result = dynamic(() => import('antd').then(mod => ({ default: mod.Result })), {
-  ssr: false,
-  loading: () => <div style={{ padding: '20px', textAlign: 'center' }}>Loading...</div>
-});
-
-const Skeleton = dynamic(() => import('antd').then(mod => ({ default: mod.Skeleton })), {
-  ssr: false,
-  loading: () => <div style={{ padding: '20px' }}>Loading content...</div>
-});
 
 function Home(props) {
   return (
@@ -67,6 +60,7 @@ function Home(props) {
 
 export async function getServerSideProps() {
   try {
+    // Fetch data from the server-side API
     const response = await axios.get(`${publicRuntimeConfig.API_BASE_URL}/api/v1/featured-rooms-list`);
     const featuredRooms = response?.data?.result;
 
@@ -80,7 +74,7 @@ export async function getServerSideProps() {
     return {
       props: {
         featuredRooms: null,
-        error: err?.response?.data || { message: err.message || 'Unknown error occurred' }
+        error: err?.data
       }
     };
   }
