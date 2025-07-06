@@ -4,7 +4,8 @@ const allowedOrigins = [
   'http://localhost:3034',
   'http://localhost:5500',
   'https://hotel-room-booking-system-j0rb.onrender.com',
-  'https://hotel-room-booking-system-3egw.vercel.app'
+  'https://hotel-room-booking-system-3egw.vercel.app',
+  'https://admin-hotel-booking-system.netlify.app'
 ];
 
 const corsOptions = {
