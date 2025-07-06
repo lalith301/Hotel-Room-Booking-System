@@ -107,7 +107,7 @@ function UserPopover() {
           style={{ position: 'absolute', right: '150px', top: '22px' }}
           level={3}
         >
-          {`Welcome! ${user?.fullName || 'N/A'}`}
+          {`Welcome  ${user?.fullName || 'N/A'}`}
         </Title>
       )}
     </>
