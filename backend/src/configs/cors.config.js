@@ -4,9 +4,7 @@ const allowedOrigins = [
   'http://localhost:3034',
   'http://localhost:5500',
   'https://hotel-room-booking-system-j0rb.onrender.com',
-  'https://api-beach-resort.srmukul.com',
-  'https://admin-beach-resort.vercel.app',
-  'https://mukul-beach-resort.vercel.app'
+  'https://hotel-room-booking-system-3egw.vercel.app'
 ];
 
 const corsOptions = {
